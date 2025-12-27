@@ -4,8 +4,10 @@ This project is an end-to-end data science workflow of loading input data, train
 
 ## Project Structure
 
+```
 ├───sandbox
 │       1_prep_data_eda.ipynb
 │       2_train_predict_svd.ipynb
 └───src
 │       train_svd_params.py
+```
