@@ -1,3 +1,11 @@
 # Info
 
-Training and deploying an algorithm (via AzureML) on my own Letterboxd logs &amp; ratings to give film title recommendations
+This project is an end-to-end data science workflow of loading input data, training an SVD recommendation model, and outputting personalized movie title recommendations & predicted ratings. In addition to the MovieLens 32M dataset, my own Letterboxd ratings were also exported and supplemented into the MovieLens dataset just to provide a personalized dimension to this project.
+
+## Project Structure
+
+├───sandbox
+│       1_prep_data_eda.ipynb
+│       2_train_predict_svd.ipynb
+└───src
+│       train_svd_params.py

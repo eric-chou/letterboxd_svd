@@ -1,5 +1,7 @@
 # sandbox, config, credentials
 data/
+*.pkl
+src/ratings_combined.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
