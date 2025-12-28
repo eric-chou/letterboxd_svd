@@ -1,7 +1,8 @@
 # sandbox, config, credentials
 data_dl/
 *.pkl
-src/ratings_combined.csv
+src/ratings_combined.parquet
+src/mlruns/
 azure_config.yml
 
 # Byte-compiled / optimized / DLL files

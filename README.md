@@ -14,4 +14,4 @@ This project is an end-to-end data science workflow of loading input data, train
 
 Training script can be run with cmd arguments from `src` directory via:
 
-`python train_svd_params.py --training_data ratings_combined.csv --n_factors 20 --lr_all 0.007 --reg_all 0.02`
+`python train_svd_params.py --training_data ratings_combined.parquet --n_factors 20 --lr_all 0.007 --reg_all 0.02`
