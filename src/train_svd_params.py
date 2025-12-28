@@ -24,12 +24,16 @@ def get_data(path):
   Read in ratings data for training. Data should have format: movie_id, user_id
   
   Args:
-    path: Path to file for ratings data
+    path: Path to a data file for ratings data (can handle CSV or Parquet)
 
   Return: A surprise Dataset object of the ratings data
   """
   print('READING DATA...')
-  df = pd.read_csv(path)
+
+  if path.endswith('.csv'): df = pd.read_csv(path)
+  elif path.endswith('.parquet'): df = pd.read_parquet(path)
+  else: return None
+
   reader = Reader(rating_scale=(0.5, 5.0))
   surprise_data = Dataset.load_from_df(df, reader)
 
