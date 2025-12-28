@@ -15,7 +15,7 @@ def main(args):
   train_set, test_set = split_data(surprise_data)
 
   # train model
-  model = train_model(args.n_factors, args.lr_all, args.reg_all, train_set)
+  model = train_model(args.n_epochs, args.lr_all, args.reg_all, train_set)
 
   # evaluate model
   eval_model(model, test_set)
@@ -50,16 +50,16 @@ def split_data(surprise_data):
   Return: 2 surprise Dataset objects for training and test sets
   """
   print('SPLITTING DATA...')
-  train_set, test_set = train_test_split(surprise_data, test_size=0.2, random_state=77)
+  train_set, test_set = train_test_split(surprise_data, test_size=0.3, random_state=77)
   
   return train_set, test_set
 
-def train_model(n_factors, lr_all, reg_all, train_set):
+def train_model(n_epochs, lr_all, reg_all, train_set):
   """
   Train SVD model
   
   Args:
-    n_factors: The number of factors.
+    n_epochs: The number of iterations for the procedure.
     lr_all: Learning rate for all parameters
     reg_all: Regularization rate for all parameters
     train_set: surprise Dataset object for training set
@@ -67,13 +67,12 @@ def train_model(n_factors, lr_all, reg_all, train_set):
   Return: Object for fitted SVD model
   """
   print('TRAINING MODEL...')
-  print(f'\tUsing parameters: n_factors={n_factors}; lr_all={lr_all}; reg_all={reg_all}')
-  mlflow.log_param('Factors', n_factors)
+  print(f'\tUsing parameters: n_epochs={n_epochs}; lr_all={lr_all}; reg_all={reg_all}')
+  mlflow.log_param('Epochs', n_epochs)
   mlflow.log_param('Learning rate', lr_all)
   mlflow.log_param('Regularization rate', reg_all)
   svd_model = SVD(
-    n_factors=n_factors, 
-    n_epochs=20, # default 
+    n_epochs=n_epochs, 
     lr_all=lr_all, 
     reg_all=reg_all,
     random_state=77
@@ -104,8 +103,8 @@ def parse_args():
 
   # add arguments
   parser.add_argument("--training_data", dest='training_data', type=str)
-  parser.add_argument("--n_factors", dest='n_factors', type=int, default=20)
-  parser.add_argument("--lr_all", dest='lr_all', type=float, default=0.007)
+  parser.add_argument("--n_epochs", dest='n_epochs', type=int, default=20)
+  parser.add_argument("--lr_all", dest='lr_all', type=float, default=0.005)
   parser.add_argument("--reg_all", dest='reg_all', type=float, default=0.02)
 
   # parse args
