@@ -1,3 +1,4 @@
+import mlflow
 import argparse
 import pandas as pd
 import numpy as np
@@ -67,6 +68,9 @@ def train_model(n_factors, lr_all, reg_all, train_set):
   """
   print('TRAINING MODEL...')
   print(f'\tUsing parameters: n_factors={n_factors}; lr_all={lr_all}; reg_all={reg_all}')
+  mlflow.log_param('Factors', n_factors)
+  mlflow.log_param('Learning rate', lr_all)
+  mlflow.log_param('Regularization rate', reg_all)
   svd_model = SVD(
     n_factors=n_factors, 
     n_epochs=20, # default 
@@ -89,6 +93,7 @@ def eval_model(svd_model, test_set):
   # RMSE as the primary metric to evaluate (minimize)
   rmse = accuracy.rmse(predictions)
   print(rmse) 
+  mlflow.log_metric('RMSE', rmse)
 
 def parse_args():
   """
