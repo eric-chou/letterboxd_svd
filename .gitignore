@@ -1,7 +1,8 @@
 # sandbox, config, credentials
-data/
+data_dl/
 *.pkl
 src/ratings_combined.csv
+azure_config.yml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
