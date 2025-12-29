@@ -27,7 +27,7 @@ def get_data(path):
   Args:
     path: Path to a data file for ratings data (can handle CSV or Parquet)
 
-  Return: A surprise Dataset object of the ratings data
+  Return: A surprise Dataset object of the ratings data (randomly sampled to 25% of the data for performance purposes)
   """
   print('READING DATA...')
 
@@ -35,6 +35,8 @@ def get_data(path):
   elif path.endswith('.parquet'): df = pd.read_parquet(path)
   else: return None
 
+  sample_size=0.25
+  df = df.sample(frac=sample_size, random_state=77)
   reader = Reader(rating_scale=(0.5, 5.0))
   surprise_data = Dataset.load_from_df(df, reader)
 
