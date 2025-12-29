@@ -8,3 +8,7 @@ dependencies:
   - pandas
   - numpy
   - matplotlib
+  - mlflow
+  - pip:
+    - azureml-mlflow
+    - azure-ai-ml
