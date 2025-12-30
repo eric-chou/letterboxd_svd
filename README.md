@@ -10,8 +10,11 @@ This project is an end-to-end data science workflow of loading input data, train
 │       2_train_predict_svd.ipynb
 └───src
 │       train_svd_params.py
+├───hyperparameter_tuning.ipynb
 ```
 
 Training script can be run with cmd arguments from `src` directory via:
 
 `python train_svd_params.py --training_data ratings_combined.parquet --n_epochs 20 --lr_all 0.005 --reg_all 0.02`
+
+Hyperparameters are tuned via Azure ML sweep job in `hyperparameter_tuning.ipynb`. The best performing model is used in the sandbox to predict my own ratings for unwatched films under `sandbox/train_predict_svd.ipynb`
