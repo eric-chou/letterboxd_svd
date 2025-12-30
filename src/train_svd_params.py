@@ -101,7 +101,7 @@ def eval_model(svd_model, test_set):
   predictions = svd_model.test(test_set)
   # RMSE as the primary metric to evaluate (minimize)
   rmse = accuracy.rmse(predictions)
-  print(rmse) 
+  # print(rmse) 
   mlflow.log_metric('RMSE', rmse)
 
   return predictions
