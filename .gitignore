@@ -4,6 +4,7 @@ data_dl/
 src/ratings_combined.parquet
 src/mlruns/
 azure_config.yml
+mlruns/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
