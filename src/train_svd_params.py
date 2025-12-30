@@ -7,6 +7,9 @@ from surprise import Dataset, Reader, SVD
 from surprise.model_selection import train_test_split
 from surprise import accuracy
 
+import mlflow.sklearn
+from mlflow.models.signature import infer_signature
+
 def main(args):
   # read data
   surprise_data = get_data(args.training_data)
@@ -17,8 +20,11 @@ def main(args):
   # train model
   model = train_model(args.n_epochs, args.lr_all, args.reg_all, train_set)
 
-  # evaluate model
-  eval_model(model, test_set)
+  # evaluate model and get predictions
+  predictions = eval_model(model, test_set)
+
+  # signature=infer_signature(train_set, predictions)
+  # mlflow.sklearn.log_model(model, "model", signature=signature)
 
 def get_data(path):
   """
@@ -89,12 +95,16 @@ def eval_model(svd_model, test_set):
   Args: 
     svd_model: Object for fitted SVD model
     test_set: surprise Dataset object for test set
+  
+  Return: List of predictions based on test set
   """
   predictions = svd_model.test(test_set)
   # RMSE as the primary metric to evaluate (minimize)
   rmse = accuracy.rmse(predictions)
   print(rmse) 
   mlflow.log_metric('RMSE', rmse)
+
+  return predictions
 
 def parse_args():
   """
